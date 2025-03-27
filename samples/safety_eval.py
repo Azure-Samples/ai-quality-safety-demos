@@ -124,10 +124,10 @@ async def run_safety_eval(max_simulations: int = 1):
             else:
                 logging.warning(f"Defect with:\nQ: {query}\nA: {answer}\n{evaluator} score: {eval_score}")
 
-    defect_counts_file = Path.cwd() / "safety-eval-results.json"
+    defect_counts_file = Path(__file__).resolve().parent / "safety-eval-results.json"
     with open(defect_counts_file, "w") as f:
         json.dump(summary_scores, f, indent=4)
 
 
 if __name__ == "__main__":
-    asyncio.run(run_safety_eval(max_simulations=10))
+    asyncio.run(run_safety_eval(max_simulations=5))

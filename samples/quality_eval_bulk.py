@@ -31,9 +31,6 @@ elif API_HOST == "github":
         "model": os.getenv("GITHUB_MODEL", "gpt-4o"),
     }
 
-path = "performance-quality-data.jsonl"
-
-
 groundedness_eval = GroundednessEvaluator(model_config)
 
 relevance_eval = RelevanceEvaluator(model_config)
