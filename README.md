@@ -62,3 +62,8 @@ This project includes infrastructure as code (IaC) to provision the Azure AI res
     It will prompt you to provide an `azd` environment name (like "ai-evals"), select a subscription from your Azure account, and select a [location where the Azure AI safety evaluators are available](https://learn.microsoft.com/azure/ai-foundry/how-to/develop/evaluate-sdk#region-support). Then it will provision the resources in your account.
 
 4. Once the resources are provisioned, you should now see a local `.env` file with all the environment variables needed to run the scripts.
+5. To delete the resources, run:
+
+    ```shell
+    azd down
+    ```
