@@ -21,7 +21,7 @@ if API_HOST == "azure":
     MODEL_NAME = os.environ["AZURE_AI_CHAT_DEPLOYMENT"]
 elif API_HOST == "github":
     client = openai.OpenAI(
-        base_url="https://models.inference.ai.azure.com",
+        base_url="https://models.github.ai/inference",
         api_key=os.environ["GITHUB_TOKEN"],
     )
     MODEL_NAME = os.getenv("GITHUB_MODEL", "gpt-4o")
