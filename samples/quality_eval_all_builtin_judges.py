@@ -31,7 +31,7 @@ elif API_HOST == "github":
         "type": "openai",
         "api_key": os.environ["GITHUB_TOKEN"],
         "base_url": "https://models.github.ai/inference",
-        "model": os.getenv("GITHUB_MODEL", "gpt-4o"),
+        "model": os.getenv("GITHUB_MODEL", "openai/gpt-4o"),
     }
 
 context = 'Dining chair. Wooden seat. Four legs. Backrest. Brown. 18" wide, 20" deep, 35" tall. Holds 250 lbs.'
