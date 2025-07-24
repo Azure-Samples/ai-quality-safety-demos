@@ -31,8 +31,8 @@ elif API_HOST == "github":
     model_config: OpenAIModelConfiguration = {
         "type": "openai",
         "api_key": os.environ["GITHUB_TOKEN"],
-        "base_url": "https://models.inference.ai.azure.com",
-        "model": os.getenv("GITHUB_MODEL", "gpt-4o"),
+        "base_url": "https://models.github.ai/inference",
+        "model": os.getenv("GITHUB_MODEL", "openai/gpt-4o"),
     }
 
 context = 'Silla de comedor. Asiento de madera. Cuatro patas. Respaldo. Marrón. 18" de ancho, 20" de profundidad, 35" de alto. Soporta 250 lbs.'
