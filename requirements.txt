@@ -1,6 +1,6 @@
 
 azure-ai-evaluation
 azure-identity
-openai
+openai>=1.108.1
 python-dotenv
 rich
