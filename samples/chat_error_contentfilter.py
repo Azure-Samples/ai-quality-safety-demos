@@ -13,10 +13,9 @@ if API_HOST == "azure":
     token_provider = azure.identity.get_bearer_token_provider(
         credential, "https://cognitiveservices.azure.com/.default"
     )
-    client = openai.AzureOpenAI(
-        api_version="2024-03-01-preview",
-        azure_endpoint=os.environ["AZURE_AI_ENDPOINT"],
-        azure_ad_token_provider=token_provider,
+    client = openai.OpenAI(
+        base_url=os.environ["AZURE_AI_ENDPOINT"] + "openai/v1",
+        api_key=token_provider,
     )
     MODEL_NAME = os.environ["AZURE_AI_CHAT_DEPLOYMENT"]
 elif API_HOST == "github":
@@ -44,3 +43,5 @@ try:
 except openai.APIError as error:
     if error.code == "content_filter":
         print("We detected a content safety violation.")
+    else:
+        print(f"API Error: {error.code} - {error.message}")
