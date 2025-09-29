@@ -112,7 +112,7 @@ module storage 'br/public:avm/res/storage/storage-account:0.9.1' = {
     roleAssignments: [
       {
         principalId: principalId
-        principalType: 'User'
+        principalType: principalType
         roleDefinitionIdOrName: 'Storage Blob Data Contributor'
       }
     ]
