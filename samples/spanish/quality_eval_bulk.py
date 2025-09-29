@@ -1,4 +1,5 @@
 import os
+from pathlib import Path
 
 import azure.identity
 from azure.ai.evaluation import (
@@ -36,8 +37,11 @@ groundedness_eval = GroundednessEvaluator(model_config)
 
 relevance_eval = RelevanceEvaluator(model_config)
 
+script_dir = Path(__file__).parent
+data_path = script_dir / "quality-eval-testdata.jsonl"
+
 result = evaluate(
-    data="quality-eval-testdata.jsonl",
+    data=data_path,
     evaluators={"relevance": relevance_eval, "groundedness": groundedness_eval},
     # column mapping
     evaluator_config={

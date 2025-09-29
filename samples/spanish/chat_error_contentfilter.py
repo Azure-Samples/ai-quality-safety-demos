@@ -14,7 +14,7 @@ if API_HOST == "azure":
         credential, "https://cognitiveservices.azure.com/.default"
     )
     client = openai.OpenAI(
-        base_url=os.environ["AZURE_AI_ENDPOINT"] + "openai/v1",
+        base_url=os.environ["AZURE_AI_ENDPOINT"] + "openai/v1/",
         api_key=token_provider,
     )
     MODEL_NAME = os.environ["AZURE_AI_CHAT_DEPLOYMENT"]

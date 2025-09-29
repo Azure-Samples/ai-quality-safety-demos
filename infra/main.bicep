@@ -7,7 +7,6 @@ param environmentName string
 
 @minLength(1)
 @description('Location for the OpenAI and Azure AI Project resources')
-// https://learn.microsoft.com/azure/ai-foundry/how-to/develop/evaluate-sdk#region-support
 @allowed([
   'eastus2'
   'francecentral'
@@ -95,12 +94,11 @@ module openAi 'br/public:avm/res/cognitive-services/account:0.7.1' = {
   }
 }
 
-
 module storage 'br/public:avm/res/storage/storage-account:0.9.1' = {
   name: 'storage'
   scope: resourceGroup
   params: {
-    name: '${prefix}storage'
+    name: '${take(replace(prefix, '-', ''), 17)}storage'
     location: location
     tags: tags
     kind: 'StorageV2'
@@ -111,19 +109,76 @@ module storage 'br/public:avm/res/storage/storage-account:0.9.1' = {
     }
     allowBlobPublicAccess: false
     allowSharedKeyAccess: false
+    roleAssignments: [
+      {
+        principalId: principalId
+        principalType: 'User'
+        roleDefinitionIdOrName: 'Storage Blob Data Contributor'
+      }
+    ]
+    blobServices: {
+      containers: [
+        {
+          name: 'default'
+          publicAccess: 'None'
+        }
+      ]
+      cors: {
+        corsRules: [
+          {
+          allowedOrigins: [
+            'https://mlworkspace.azure.ai'
+            'https://ml.azure.com'
+            'https://*.ml.azure.com'
+            'https://ai.azure.com'
+            'https://*.ai.azure.com'
+            'https://mlworkspacecanary.azure.ai'
+            'https://mlworkspace.azureml-test.net'
+          ]
+          allowedMethods: [
+            'GET'
+            'HEAD'
+            'POST'
+            'PUT'
+            'DELETE'
+            'OPTIONS'
+            'PATCH'
+          ]
+          maxAgeInSeconds: 1800
+          exposedHeaders: [
+            '*'
+          ]
+          allowedHeaders: [
+            '*'
+          ]
+        }
+      ]
+    }
+  }
   }
 }
 
-module ai 'core/ai/ai-environment.bicep' = {
+module ai 'core/ai/foundry.bicep' = {
   name: 'ai'
   scope: resourceGroup
   params: {
     location: location
     tags: tags
-    hubName: 'aihub-${resourceToken}'
-    projectName: 'aiproj-${resourceToken}'
-    storageAccountId: storage.outputs.resourceId
-    applicationInsightsId: ''
+    foundryName: 'aifoundry-${resourceToken}'
+    projectName: 'aiproject-${resourceToken}'
+    storageAccountName: storage.outputs.name
+    principalId: principalId
+    principalType: principalType
+  }
+}
+
+module azureAiUserRole 'core/security/role.bicep' = {
+  name: 'azureai-role-user'
+  scope: resourceGroup
+  params: {
+    principalId: principalId
+    roleDefinitionId: '53ca6127-db72-4b80-b1b0-d745d6d5456d' // Azure AI User
+    principalType: principalType
   }
 }
 
@@ -136,4 +191,5 @@ output AZURE_AI_SERVICE string = openAi.outputs.name
 output AZURE_AI_ENDPOINT string = openAi.outputs.endpoint
 output AZURE_AI_CHAT_MODEL string = gptModelName
 output AZURE_AI_CHAT_DEPLOYMENT string = gptDeploymentName
+output AZURE_AI_FOUNDRY string = ai.outputs.foundryName
 output AZURE_AI_PROJECT string = ai.outputs.projectName
