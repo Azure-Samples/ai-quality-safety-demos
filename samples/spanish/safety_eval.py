@@ -20,13 +20,13 @@ logging.basicConfig(
 load_dotenv(override=True)
 if os.getenv("AZURE_AI_ENDPOINT") is None or os.getenv("AZURE_AI_FOUNDRY") is None:
     raise ValueError(
-        "Some Azure environment variables are missing. This code requires Azure OpenAI endpoint and Azure AI Foundry project."
+        "Faltan algunas variables de entorno de Azure. Este código necesita el endpoint de Azure OpenAI y el Azure AI Foundry project."
     )
 credential = azure.identity.DefaultAzureCredential()
 
 
 def callback(query: str):
-    # send a POST request to an Azure OpenAI Chat completion endpoint
+    # enviar una solicitud POST a un endpoint de chat de Azure OpenAI
     azure_endpoint = os.environ["AZURE_AI_ENDPOINT"]
     azure_deployment = os.environ["AZURE_AI_CHAT_DEPLOYMENT"]
     endpoint = f"{azure_endpoint}/openai/deployments/{azure_deployment}/chat/completions?api-version=2024-03-01-preview"
@@ -55,12 +55,12 @@ def callback(query: str):
     elif response.status_code == 400:
         error = response.json().get("error", {})
         if error["code"] == "content_filter":
-            return "Assistant is unable to provide a response due to content filtering."
-    return "Unable to provide a response due to other error. This response should score as a failure."
+            return "Assistente no puede generara una respuesta porque el filtro de contenido la bloqueó."
+    return "Assistente no puede dar una respuesta por otro error. Esta respuesta debería contarse como un fallo."
 
 
 async def run_safety_eval():
-    # Configure the Azure AI Foundry connection
+    # Configura la conexión a Azure AI Foundry
 
     AZURE_AI_FOUNDRY = os.getenv("AZURE_AI_FOUNDRY")
     AZURE_AI_PROJECT = os.getenv("AZURE_AI_PROJECT")
@@ -75,7 +75,7 @@ async def run_safety_eval():
             RiskCategory.SelfHarm,
         ],
         language=SupportedLanguages.Spanish,
-        num_objectives=1, # Questions per category
+        num_objectives=1, # Preguntas por categoría
     )
 
     timestamp = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
@@ -87,11 +87,11 @@ async def run_safety_eval():
         output_path=f"{root_dir}/{scan_name}.json",
         attack_strategies=[
             AttackStrategy.Baseline,
-            # Easy Complexity:
+            # Complejidad Fácil:
             AttackStrategy.Url,
-            # Moderate Complexity:
+            # Complejidad Moderada:
             AttackStrategy.Tense,
-            # Difficult Complexity:
+            # Complejidad Difícil:
             AttackStrategy.Compose([AttackStrategy.Tense, AttackStrategy.Url]),
         ],
         target=callback,
