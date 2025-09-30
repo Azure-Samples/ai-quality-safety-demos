@@ -2,7 +2,7 @@
 
 name: ai-safety-quality-demos
 metadata:
-  template: ai-safety-quality-demos@0.0.1
+  template: ai-safety-quality-demos@0.1.0
 hooks:
     postprovision:
       windows:

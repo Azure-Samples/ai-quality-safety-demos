@@ -1,5 +1,5 @@
 
-azure-ai-evaluation
+azure-ai-evaluation[redteam]>=1.8.0
 azure-identity
 openai>=1.108.1
 python-dotenv

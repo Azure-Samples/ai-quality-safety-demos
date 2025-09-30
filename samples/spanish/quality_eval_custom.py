@@ -1,4 +1,5 @@
 import os
+from pathlib import Path
 
 import azure.identity
 import rich
@@ -33,6 +34,7 @@ elif API_HOST == "github":
 query = "¡He estado en espera por 30 minutos solo para preguntar por mi equipaje! Esto es ridículo. ¿Dónde está mi maleta?"
 response = "Lamento mucho la larga espera, debe haber sido frustrante. Entiendo que estés preocupado por tu equipaje. Déjame ayudarte a localizarlo de inmediato. ¿Podrías proporcionarme el número de etiqueta de tu maleta o los detalles de tu vuelo para poder rastrearlo?"
 
-friendliness_eval = load_flow(source="friendliness.prompty", model={"configuration": model_config})
+script_dir = Path(__file__).parent
+friendliness_eval = load_flow(source=script_dir / "friendliness.prompty", model={"configuration": model_config})
 friendliness_score = friendliness_eval(query=query, response=response)
 rich.print(f"Friendliness score: {friendliness_score}")
