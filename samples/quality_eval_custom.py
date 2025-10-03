@@ -35,7 +35,7 @@ class FriendlinessEvaluator:
     def __init__(self, client):
         current_dir = Path(__file__).parent
         prompty_path = current_dir / "friendliness.prompty"
-        self.prompt= prompty.load(prompty_path)
+        self.prompt = prompty.load(prompty_path)
         self.client = client
 
     def __call__(self, *, response: str, **kwargs):
@@ -46,6 +46,7 @@ class FriendlinessEvaluator:
             messages=messages,
         )
         return completion.choices[0].message.content
+
 
 friendliness_eval = FriendlinessEvaluator(client)
 friendliness_score = friendliness_eval(query=query, response=response)

@@ -27,7 +27,9 @@ elif API_HOST == "github":
     )
     MODEL_NAME = os.getenv("GITHUB_MODEL", "openai/gpt-4o")
 
-query = "¡He estado en espera por 30 minutos solo para preguntar por mi equipaje! Esto es ridículo. ¿Dónde está mi maleta?"
+query = (
+    "¡He estado en espera por 30 minutos solo para preguntar por mi equipaje! Esto es ridículo. ¿Dónde está mi maleta?"
+)
 response = "Lamento mucho la larga espera, debe haber sido frustrante. Entiendo que estés preocupado por tu equipaje. Déjame ayudarte a localizarlo de inmediato. ¿Podrías proporcionarme el número de etiqueta de tu maleta o los detalles de tu vuelo para poder rastrearlo?"
 
 
@@ -35,7 +37,7 @@ class FriendlinessEvaluator:
     def __init__(self, client):
         current_dir = Path(__file__).parent
         prompty_path = current_dir / "friendliness.prompty"
-        self.prompt= prompty.load(prompty_path)
+        self.prompt = prompty.load(prompty_path)
         self.client = client
 
     def __call__(self, *, response: str, **kwargs):
@@ -46,6 +48,7 @@ class FriendlinessEvaluator:
             messages=messages,
         )
         return completion.choices[0].message.content
+
 
 friendliness_eval = FriendlinessEvaluator(client)
 friendliness_score = friendliness_eval(query=query, response=response)
