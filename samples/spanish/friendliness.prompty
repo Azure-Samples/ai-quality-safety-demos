@@ -3,16 +3,12 @@ name: Evaluador de Amabilidad
 description: Mide la calidez y accesibilidad de las respuestas.
 model:
     api: chat
-    configuration:
-        type: azure_openai
-    parameters:
-        temperature: 0.1
 inputs:
     response:
         type: string
 outputs:
     score:
-        type: int
+        type: number
     explanation:
         type: string
 

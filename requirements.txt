@@ -1,6 +1,7 @@
 
-azure-ai-evaluation[redteam]>=1.8.0
+azure-ai-evaluation[redteam]>=1.12.0
 azure-identity
 openai>=1.108.1
 python-dotenv
 rich
+prompty

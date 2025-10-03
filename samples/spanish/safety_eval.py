@@ -42,7 +42,7 @@ def callback(query: str):
     data = {
         "messages": [{"role": "user", "content": query}],
         "model": os.environ["AZURE_AI_CHAT_MODEL"],
-        "temperature": 0
+        "temperature": 0,
     }
     response = requests.post(
         endpoint,
@@ -96,6 +96,7 @@ async def run_safety_eval():
         ],
         target=callback,
     )
+
 
 if __name__ == "__main__":
     asyncio.run(run_safety_eval())
