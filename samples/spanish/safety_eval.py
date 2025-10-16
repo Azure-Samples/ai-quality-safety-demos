@@ -62,8 +62,8 @@ def callback(query: str):
 async def run_safety_eval():
     # Configura la conexión a Azure AI Foundry
 
-    AZURE_AI_FOUNDRY = os.getenv("AZURE_AI_FOUNDRY")
-    AZURE_AI_PROJECT = os.getenv("AZURE_AI_PROJECT")
+    AZURE_AI_FOUNDRY = os.environ["AZURE_AI_FOUNDRY"]
+    AZURE_AI_PROJECT = os.environ["AZURE_AI_PROJECT"]
 
     model_red_team = RedTeam(
         azure_ai_project=f"https://{AZURE_AI_FOUNDRY}.services.ai.azure.com/api/projects/{AZURE_AI_PROJECT}",
