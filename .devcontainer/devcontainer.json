@@ -15,7 +15,10 @@
                 "ms-python.python"
             ],
             "settings": {
-                "python.defaultInterpreterPath": "/usr/local/bin/python"
+                "python.defaultInterpreterPath": "/usr/local/bin/python",
+                "remote.autoForwardPorts": false,
+                "python.createEnvironment.trigger": "off",
+                "python.analysis.typeCheckingMode": "off"
             }
         }
     },
