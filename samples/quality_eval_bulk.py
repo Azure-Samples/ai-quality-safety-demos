@@ -62,6 +62,6 @@ result = evaluate(
             "context": "${data.context}",
         }
     },
-    output_path="quality-eval-results.jsonl",
+    output_path=script_dir / "quality-eval-results.jsonl",
     azure_ai_project=azure_ai_project,
 )
