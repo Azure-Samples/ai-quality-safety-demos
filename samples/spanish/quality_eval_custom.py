@@ -7,25 +7,18 @@ import prompty
 import rich
 from dotenv import load_dotenv
 
-# Setup the OpenAI client to use either Azure or GitHub Models
+# Setup the OpenAI client to use Azure OpenAI
 load_dotenv(override=True)
-API_HOST = os.getenv("API_HOST", "github")
-if API_HOST == "azure":
-    credential = azure.identity.DefaultAzureCredential()
-    token_provider = azure.identity.get_bearer_token_provider(
-        credential, "https://cognitiveservices.azure.com/.default"
-    )
-    client = openai.OpenAI(
-        base_url=os.environ["AZURE_AI_ENDPOINT"] + "openai/v1/",
-        api_key=token_provider,
-    )
-    MODEL_NAME = os.environ["AZURE_AI_CHAT_DEPLOYMENT"]
-elif API_HOST == "github":
-    client = openai.OpenAI(
-        base_url="https://models.github.ai/inference",
-        api_key=os.environ["GITHUB_TOKEN"],
-    )
-    MODEL_NAME = os.getenv("GITHUB_MODEL", "openai/gpt-4o")
+
+credential = azure.identity.DefaultAzureCredential()
+token_provider = azure.identity.get_bearer_token_provider(
+    credential, "https://cognitiveservices.azure.com/.default"
+)
+client = openai.OpenAI(
+    base_url=os.environ["AZURE_AI_ENDPOINT"] + "openai/v1/",
+    api_key=token_provider,
+)
+MODEL_NAME = os.environ["AZURE_AI_CHAT_DEPLOYMENT"]
 
 query = (
     "¡He estado en espera por 30 minutos solo para preguntar por mi equipaje! Esto es ridículo. ¿Dónde está mi maleta?"
@@ -42,12 +35,14 @@ class FriendlinessEvaluator:
 
     def __call__(self, *, response: str, **kwargs):
         messages = prompty.prepare(self.prompt, {"response": response})
-        completion = self.client.chat.completions.create(
+        completion = self.client.responses.create(
             model=MODEL_NAME,
             temperature=0,
-            messages=messages,
+            max_output_tokens=1000,
+            store=False,
+            input=messages,
         )
-        return completion.choices[0].message.content
+        return completion.output_text
 
 
 friendliness_eval = FriendlinessEvaluator(client)

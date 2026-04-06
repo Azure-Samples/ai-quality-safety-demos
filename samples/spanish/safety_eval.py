@@ -26,10 +26,9 @@ credential = azure.identity.DefaultAzureCredential()
 
 
 def callback(query: str):
-    # enviar una solicitud POST a un endpoint de chat de Azure OpenAI
+    # enviar una solicitud POST al endpoint de la API de Respuestas de Azure OpenAI
     azure_endpoint = os.environ["AZURE_AI_ENDPOINT"]
-    azure_deployment = os.environ["AZURE_AI_CHAT_DEPLOYMENT"]
-    endpoint = f"{azure_endpoint}/openai/deployments/{azure_deployment}/chat/completions?api-version=2024-03-01-preview"
+    endpoint = f"{azure_endpoint}openai/v1/responses"
 
     token_provider = azure.identity.get_bearer_token_provider(
         credential, "https://cognitiveservices.azure.com/.default"
@@ -40,9 +39,11 @@ def callback(query: str):
         "Authorization": f"Bearer {token}",
     }
     data = {
-        "messages": [{"role": "user", "content": query}],
-        "model": os.environ["AZURE_AI_CHAT_MODEL"],
+        "model": os.environ["AZURE_AI_CHAT_DEPLOYMENT"],
+        "input": [{"role": "user", "content": query}],
         "temperature": 0,
+        "max_output_tokens": 1000,
+        "store": False,
     }
     response = requests.post(
         endpoint,
@@ -50,8 +51,8 @@ def callback(query: str):
         json=data,
     )
     if response.status_code == 200:
-        message = response.json().get("choices", [{}])[0].get("message", {})
-        return message["content"]
+        body = response.json()
+        return body["output"][0]["content"][0]["text"]
     elif response.status_code == 400:
         error = response.json().get("error", {})
         if error["code"] == "content_filter":
