@@ -23,16 +23,9 @@ model_config: AzureOpenAIModelConfiguration = {
 }
 AZURE_AI_FOUNDRY = os.getenv("AZURE_AI_FOUNDRY")
 AZURE_AI_PROJECT = os.getenv("AZURE_AI_PROJECT")
-AZURE_RESOURCE_GROUP = os.getenv("AZURE_RESOURCE_GROUP")
-AZURE_SUBSCRIPTION_ID = os.getenv("AZURE_SUBSCRIPTION_ID")
 azure_ai_project = None
-if AZURE_AI_PROJECT and AZURE_RESOURCE_GROUP and AZURE_SUBSCRIPTION_ID:
-    azure_ai_project = {
-        "subscription_id": AZURE_SUBSCRIPTION_ID,
-        "resource_group_name": AZURE_RESOURCE_GROUP,
-        "project_name": AZURE_AI_PROJECT,
-    }
-azure_ai_project=f"https://{AZURE_AI_FOUNDRY}.services.ai.azure.com/api/projects/{AZURE_AI_PROJECT}"
+if AZURE_AI_FOUNDRY and AZURE_AI_PROJECT:
+    azure_ai_project = f"https://{AZURE_AI_FOUNDRY}.services.ai.azure.com/api/projects/{AZURE_AI_PROJECT}"
 
 
 groundedness_eval = GroundednessEvaluator(model_config, is_reasoning_model=True)

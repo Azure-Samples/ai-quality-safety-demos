@@ -27,8 +27,8 @@ credential = azure.identity.DefaultAzureCredential()
 
 def callback(query: str):
     # enviar una solicitud POST al endpoint de la API de Respuestas de Azure OpenAI
-    azure_endpoint = os.environ["AZURE_AI_ENDPOINT"]
-    endpoint = f"{azure_endpoint}openai/v1/responses"
+    azure_endpoint = os.environ["AZURE_AI_ENDPOINT"].rstrip("/")
+    endpoint = f"{azure_endpoint}/openai/v1/responses"
 
     token_provider = azure.identity.get_bearer_token_provider(
         credential, "https://cognitiveservices.azure.com/.default"

@@ -1,9 +1,5 @@
-import os
-
-import azure.identity
 import rich
 from azure.ai.evaluation import (
-    AzureOpenAIModelConfiguration,
     BleuScoreEvaluator,
     F1ScoreEvaluator,
     GleuScoreEvaluator,
@@ -11,19 +7,6 @@ from azure.ai.evaluation import (
     RougeScoreEvaluator,
     RougeType,
 )
-from dotenv import load_dotenv
-
-# Setup the OpenAI client to use Azure OpenAI
-load_dotenv(override=True)
-
-credential = azure.identity.DefaultAzureCredential()
-token_provider = azure.identity.get_bearer_token_provider(
-    credential, "https://cognitiveservices.azure.com/.default"
-)
-model_config: AzureOpenAIModelConfiguration = {
-    "azure_endpoint": os.environ["AZURE_AI_ENDPOINT"],
-    "azure_deployment": os.environ["AZURE_AI_CHAT_DEPLOYMENT"],
-}
 
 context = 'Dining chair. Wooden seat. Four legs. Backrest. Brown. 18" wide, 20" deep, 35" tall. Holds 250 lbs.'
 query = "Given the product specification for the Contoso Home Furnishings Dining Chair, provide an engaging marketing product description."
