@@ -1,6 +1,6 @@
 # Demos de Calidad y Seguridad de IA
 
-Este repositorio contiene una colección de scripts de Python que muestran cómo usar la API de OpenAI y el SDK de evaluación de Microsoft Foundry para evaluar la calidad y seguridad de contenido generado por IA. Los scripts usan recursos de Microsoft Foundry configurados mediante variables de entorno. El script `safety_eval.py` también requiere un proyecto de Microsoft Foundry. Abajo hay más detalles.
+Este repositorio contiene una colección de scripts de Python que muestran cómo usar la API de OpenAI y el Azure AI Evaluation SDK para evaluar la calidad y seguridad de contenido generado por IA. Los scripts usan recursos de Microsoft Foundry configurados mediante variables de entorno. El script `safety_eval.py` también requiere un proyecto de Microsoft Foundry. Abajo hay más detalles.
 
 ## Scripts disponibles
 
@@ -8,12 +8,12 @@ Revisa el directorio `samples/spanish` para ver los scripts disponibles.
 
 * [chat_error_contentfilter.py](samples/spanish/chat_error_contentfilter.py): Hace una llamada de chat completion con el paquete de OpenAI con un mensaje violento y maneja el error de seguridad de contenido en la respuesta.
 * [chat_error_jailbreak.py](samples/spanish/chat_error_jailbreak.py): Hace una llamada de chat completion con el paquete de OpenAI con un intento de jailbreak y maneja el error de seguridad de contenido en la respuesta.
-* [quality_eval_groundedness.py](samples/spanish/quality_eval_groundedness.py): Evalúa la fundamentación de una respuesta de muestra y fuentes usando el SDK de evaluación de Microsoft Foundry.
-* [quality_eval_all_builtin_judges.py](samples/spanish/quality_eval_all_builtin_judges.py): Evalúa la calidad de una consulta y respuesta de muestra usando todos los evaluadores basados en GPT integrados en el SDK de evaluación de Microsoft Foundry.
-* [quality_eval_custom.py](samples/spanish/quality_eval_custom.py): Evalúa la calidad de una consulta y respuesta de muestra con el SDK de evaluación de Microsoft Foundry usando un evaluador personalizado para "amabilidad".
-* [quality_eval_other_builtins.py](samples/spanish/quality_eval_other_builtins.py): Evalúa la calidad de una consulta y respuesta de muestra usando evaluadores no basados en GPT en el SDK de evaluación de Microsoft Foundry (métricas de NLP como F1, BLEU, ROUGE, etc.).
-* [quality_eval_bulk.py](samples/spanish/quality_eval_bulk.py): Evalúa la calidad de múltiples pares de consulta/respuesta usando el SDK de evaluación de Microsoft Foundry.
-* [safety_eval.py](samples/spanish/safety_eval.py): Evalúa la seguridad de una consulta y respuesta de muestra usando el SDK de evaluación de Microsoft Foundry. Este script requiere un proyecto de Microsoft Foundry.
+* [quality_eval_groundedness.py](samples/spanish/quality_eval_groundedness.py): Evalúa la fundamentación de una respuesta de muestra y fuentes usando el Azure AI Evaluation SDK.
+* [quality_eval_all_builtin_judges.py](samples/spanish/quality_eval_all_builtin_judges.py): Evalúa la calidad de una consulta y respuesta de muestra usando todos los evaluadores basados en GPT integrados en el Azure AI Evaluation SDK.
+* [quality_eval_custom.py](samples/spanish/quality_eval_custom.py): Evalúa la calidad de una consulta y respuesta de muestra con el Azure AI Evaluation SDK usando un evaluador personalizado para "amabilidad".
+* [quality_eval_other_builtins.py](samples/spanish/quality_eval_other_builtins.py): Evalúa la calidad de una consulta y respuesta de muestra usando evaluadores no basados en GPT en el Azure AI Evaluation SDK (métricas de NLP como F1, BLEU, ROUGE, etc.).
+* [quality_eval_bulk.py](samples/spanish/quality_eval_bulk.py): Evalúa la calidad de múltiples pares de consulta/respuesta usando el Azure AI Evaluation SDK.
+* [safety_eval.py](samples/spanish/safety_eval.py): Evalúa la seguridad de una consulta y respuesta de muestra usando el Azure AI Evaluation SDK. Este script requiere un proyecto de Microsoft Foundry.
 
 ## Ejecutando los scripts
 
