@@ -1,6 +1,5 @@
 import os
 
-import azure.identity
 import rich
 from azure.ai.evaluation import (
     AzureOpenAIModelConfiguration,
@@ -15,10 +14,6 @@ from dotenv import load_dotenv
 # Setup the OpenAI client to use Azure OpenAI
 load_dotenv(override=True)
 
-credential = azure.identity.DefaultAzureCredential()
-token_provider = azure.identity.get_bearer_token_provider(
-    credential, "https://cognitiveservices.azure.com/.default"
-)
 model_config: AzureOpenAIModelConfiguration = {
     "azure_endpoint": os.environ["AZURE_AI_ENDPOINT"],
     "azure_deployment": os.environ["AZURE_AI_CHAT_DEPLOYMENT"],
