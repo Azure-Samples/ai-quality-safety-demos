@@ -1,6 +1,6 @@
 # Demos de Calidad y Seguridad de IA
 
-Este repositorio contiene una colección de scripts de Python que muestran cómo usar la API de OpenAI y el Azure AI Evaluation SDK para evaluar la calidad y seguridad de contenido generado por IA. La mayoría de los scripts se pueden ejecutar gratis con GitHub Models en GitHub Codespaces, pero el script `safety_eval.py` requiere un Proyecto de Azure AI. Abajo hay más detalles.
+Este repositorio contiene una colección de scripts de Python que muestran cómo usar la API de OpenAI y el Azure AI Evaluation SDK para evaluar la calidad y seguridad de contenido generado por IA. Los scripts usan recursos de Azure AI configurados mediante variables de entorno. El script `safety_eval.py` también requiere un Proyecto de Azure AI. Abajo hay más detalles.
 
 ## Scripts disponibles
 
@@ -15,24 +15,28 @@ Revisa el directorio `samples/spanish` para ver los scripts disponibles.
 * [quality_eval_bulk.py](samples/spanish/quality_eval_bulk.py): Evalúa la calidad de múltiples pares de consulta/respuesta usando el Azure AI Evaluation SDK.
 * [safety_eval.py](samples/spanish/safety_eval.py): Evalúa la seguridad de una consulta y respuesta de muestra usando el Azure AI Evaluation SDK. Este script requiere un Azure AI Project.
 
-## Configurando GitHub Models
+## Ejecutando los scripts
 
-Si abres este repositorio en GitHub Codespaces, puedes ejecutar los scripts gratis usando GitHub Models sin pasos adicionales, ya que tu `GITHUB_TOKEN` ya está configurado en el entorno de Codespaces.
+Primero aprovisiona los recursos de Azure AI para este repositorio y luego ejecuta los ejemplos con el archivo local `.env` generado y una identidad de Azure autenticada.
 
-Si quieres ejecutar los scripts localmente, necesitas configurar la variable de entorno `GITHUB_TOKEN` con un token de acceso personal (PAT) de GitHub. Puedes crear un PAT siguiendo estos pasos:
-
-1. Ve a la configuración de tu cuenta de GitHub.
-2. Haz clic en "Developer settings" en la barra lateral izquierda.
-3. Haz clic en "Personal access tokens" en la barra lateral izquierda.
-4. Haz clic en "Tokens (classic)" o "Fine-grained tokens" según tu preferencia.
-5. Haz clic en "Generate new token".
-6. Dale un nombre a tu token y selecciona los permisos que quieras otorgar. Para este proyecto, no necesitas permisos específicos.
-7. Haz clic en "Generate token".
-8. Copia el token generado.
-9. Configura la variable de entorno `GITHUB_TOKEN` en tu terminal o IDE:
+1. Instala las dependencias y activa tu entorno virtual.
+2. Autentícate con Azure:
 
     ```shell
-    export GITHUB_TOKEN=tu_token_de_acceso_personal
+    azd auth login
+    ```
+
+3. Aprovisiona los recursos de Azure AI:
+
+    ```shell
+    azd provision
+    ```
+
+4. Confirma que `azd` haya creado un archivo local `.env` con valores como `AZURE_AI_ENDPOINT` y `AZURE_AI_CHAT_DEPLOYMENT`.
+5. Ejecuta cualquier ejemplo del directorio `samples/spanish`, por ejemplo:
+
+    ```shell
+    python samples/spanish/quality_eval_all_builtin_judges.py
     ```
 
 ## Aprovisionando recursos de Azure AI
@@ -53,7 +57,7 @@ Este proyecto incluye infraestructura como código (IaC) para aprovisionar los r
     azd auth login --use-device-code
     ```
 
-3. Aprovisiona la cuenta de OpenAI:
+3. Aprovisiona los recursos de Azure AI:
 
     ```shell
     azd provision
