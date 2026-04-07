@@ -6,8 +6,8 @@ Este repositorio contiene una colección de scripts de Python que muestran cómo
 
 Revisa el directorio `samples/spanish` para ver los scripts disponibles.
 
-* [chat_error_contentfilter.py](samples/spanish/chat_error_contentfilter.py): Hace una llamada de chat completion con el paquete de OpenAI con un mensaje violento y maneja el error de seguridad de contenido en la respuesta.
-* [chat_error_jailbreak.py](samples/spanish/chat_error_jailbreak.py): Hace una llamada de chat completion con el paquete de OpenAI con un intento de jailbreak y maneja el error de seguridad de contenido en la respuesta.
+* [chat_error_contentfilter.py](samples/spanish/chat_error_contentfilter.py): Hace una llamada a la Responses API con el paquete de OpenAI usando un mensaje violento y maneja el error de seguridad de contenido en la respuesta.
+* [chat_error_jailbreak.py](samples/spanish/chat_error_jailbreak.py): Hace una llamada a la Responses API con el paquete de OpenAI usando un intento de jailbreak y maneja el error de seguridad de contenido en la respuesta.
 * [quality_eval_groundedness.py](samples/spanish/quality_eval_groundedness.py): Evalúa la fundamentación de una respuesta de muestra y fuentes usando el Azure AI Evaluation SDK.
 * [quality_eval_all_builtin_judges.py](samples/spanish/quality_eval_all_builtin_judges.py): Evalúa la calidad de una consulta y respuesta de muestra usando todos los evaluadores basados en GPT integrados en el Azure AI Evaluation SDK.
 * [quality_eval_custom.py](samples/spanish/quality_eval_custom.py): Evalúa la calidad de una consulta y respuesta de muestra con el Azure AI Evaluation SDK usando un evaluador personalizado para "amabilidad".
