@@ -20,7 +20,7 @@ logging.basicConfig(
 load_dotenv(override=True)
 if os.getenv("AZURE_AI_ENDPOINT") is None or os.getenv("AZURE_AI_FOUNDRY") is None:
     raise ValueError(
-        "Some Azure environment variables are missing. This code requires Azure OpenAI endpoint and Azure AI Foundry project."
+        "Some Azure environment variables are missing. This code requires Azure OpenAI endpoint and Microsoft Foundry project."
     )
 credential = azure.identity.DefaultAzureCredential()
 
@@ -61,7 +61,7 @@ def callback(query: str):
 
 
 async def run_safety_eval():
-    # Configure the Azure AI Foundry connection
+    # Configure the Microsoft Foundry connection
 
     AZURE_AI_FOUNDRY = os.environ["AZURE_AI_FOUNDRY"]
     AZURE_AI_PROJECT = os.environ["AZURE_AI_PROJECT"]
