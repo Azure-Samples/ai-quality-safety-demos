@@ -6,8 +6,8 @@ This repository contains a collection of Python scripts that demonstrate how to 
 
 Check the `samples` directory for the available scripts.
 
-* [chat_error_contentfilter.py](samples/chat_error_contentfilter.py): Makes a chat completion call with OpenAI package with a violent message and handles the content safety error in the response.
-* [chat_error_jailbreak.py](samples/chat_error_jailbreak.py): Makes a chat completion call with OpenAI package with a jailbreak attempt and handles the content safety error in the response.
+* [chat_error_contentfilter.py](samples/chat_error_contentfilter.py): Makes a Responses API call with the OpenAI package using a violent message and handles the content safety error in the response.
+* [chat_error_jailbreak.py](samples/chat_error_jailbreak.py): Makes a Responses API call with the OpenAI package using a jailbreak attempt and handles the content safety error in the response.
 * [quality_eval_groundedness.py](samples/quality_eval_groundedness.py): Evaluates the groundedness of a sample answer and sources using the Azure AI Evaluation SDK.
 * [quality_eval_all_builtin_judges.py](samples/quality_eval_all_builtin_judges.py): Evaluates the quality of a sample query and answer using all of the built-in GPT-based evaluators in the Azure AI Evaluation SDK.
 * [quality_eval_custom.py](samples/quality_eval_custom.py): Evaluates the quality of a sample query and answer with the Azure AI Evaluation SDK using a custom evaluator for "friendliness".
