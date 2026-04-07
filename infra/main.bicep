@@ -6,7 +6,7 @@ targetScope = 'subscription'
 param environmentName string
 
 @minLength(1)
-@description('Location for the OpenAI and Azure AI Project resources')
+@description('Location for all provisioned resources')
 @allowed([
   'eastus2'
   'francecentral'
