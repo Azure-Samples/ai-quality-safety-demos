@@ -91,25 +91,25 @@ resource storageRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-
   }
 }
 
-// Assign a role to the calling user for the AI Foundry project (needed for projects (including agents) API)
+// Assign a role to the principal for the AI Foundry project (needed for projects (including agents) API)
 resource projectRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
   name: guid(project.id, 'Azure AI User', principalId)
   scope: project
   properties: {
     roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', '53ca6127-db72-4b80-b1b0-d745d6d5456d') // Azure AI User
     principalId: principalId
-    principalType: 'User'
+    principalType: principalType
   }
 }
 
-// Assign a role to the calling user for the AI Foundry account (needed for Azure OpenAI API)
+// Assign a role to the principal for the AI Foundry account (needed for Azure OpenAI API)
 resource accountRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
   name: guid(account.id, 'Azure AI User', principalId)
   scope: account
   properties: {
     roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', '53ca6127-db72-4b80-b1b0-d745d6d5456d') // Azure AI User
     principalId: principalId
-    principalType: 'User'
+    principalType: principalType
   }
 }
 
