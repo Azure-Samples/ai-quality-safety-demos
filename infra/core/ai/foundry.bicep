@@ -98,7 +98,7 @@ resource projectRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-
   properties: {
     roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', '53ca6127-db72-4b80-b1b0-d745d6d5456d') // Azure AI User
     principalId: principalId
-    principalType: 'User'
+    principalType: principalType
   }
 }
 
@@ -109,7 +109,7 @@ resource accountRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-
   properties: {
     roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', '53ca6127-db72-4b80-b1b0-d745d6d5456d') // Azure AI User
     principalId: principalId
-    principalType: 'User'
+    principalType: principalType
   }
 }
 
