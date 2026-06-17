@@ -91,7 +91,7 @@ resource storageRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-
   }
 }
 
-// Assign a role to the calling user for the AI Foundry project (needed for projects (including agents) API)
+// Assign a role to the principal for the AI Foundry project (needed for projects (including agents) API)
 resource projectRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
   name: guid(project.id, 'Azure AI User', principalId)
   scope: project
@@ -102,7 +102,7 @@ resource projectRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-
   }
 }
 
-// Assign a role to the calling user for the AI Foundry account (needed for Azure OpenAI API)
+// Assign a role to the principal for the AI Foundry account (needed for Azure OpenAI API)
 resource accountRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
   name: guid(account.id, 'Azure AI User', principalId)
   scope: account
